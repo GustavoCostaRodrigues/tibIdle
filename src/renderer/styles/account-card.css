@@ -1,0 +1,253 @@
+.account-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  position: relative;
+  contain: layout size;
+  transform: translateZ(0);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.account-card:hover {
+  border-color: var(--border-medium);
+}
+
+.account-card.is-featured {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 12px var(--accent-subtle);
+}
+
+/* Barra de Ferramentas do Card */
+.card-toolbar {
+  height: 36px;
+  background-color: var(--bg-card-header);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-success);
+  box-shadow: 0 0 6px var(--color-success);
+  transition: background-color var(--transition-fast);
+}
+
+.status-dot.loading {
+  background: var(--color-warning);
+  box-shadow: 0 0 6px var(--color-warning);
+}
+
+.status-dot.error {
+  background: var(--color-danger);
+  box-shadow: 0 0 6px var(--color-danger);
+}
+
+.account-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Controles de Zoom */
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  background: var(--bg-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 1px 3px;
+  gap: 2px;
+}
+
+.zoom-level {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 0 4px;
+  cursor: pointer;
+  min-width: 34px;
+  text-align: center;
+}
+
+.zoom-level:hover {
+  color: var(--accent-primary);
+}
+
+/* Botões da Toolbar */
+.btn-tool {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.btn-tool svg {
+  width: 13px;
+  height: 13px;
+}
+
+.btn-tool:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.btn-tool.active {
+  color: var(--accent-primary);
+}
+
+/* Botão Mudo */
+.btn-mute .icon-muted {
+  display: none;
+}
+
+.btn-mute.is-muted {
+  color: var(--color-danger);
+}
+
+.btn-mute.is-muted .icon-unmuted {
+  display: none;
+}
+
+.btn-mute.is-muted .icon-muted {
+  display: block;
+}
+
+/* Rotação no Recarregar */
+@keyframes spin-reload {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.btn-reload.is-spinning svg {
+  animation: spin-reload 800ms linear infinite;
+  color: var(--accent-primary);
+}
+
+/* Botão Maximizar */
+.btn-maximize .icon-restore {
+  display: none;
+}
+
+.btn-maximize.active .icon-maximize {
+  display: none;
+}
+
+.btn-maximize.active .icon-restore {
+  display: block;
+}
+
+/* Container do Webview */
+.webview-container {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-base);
+}
+
+webview.account-webview {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  border: none;
+}
+
+/* Overlays */
+.webview-loading-overlay,
+.webview-error-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--bg-base);
+  z-index: 10;
+  color: var(--text-secondary);
+}
+
+.loading-spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--border-medium);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: spin-reload 700ms linear infinite;
+}
+
+.loading-text {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.error-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--color-danger);
+}
+
+.error-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.error-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.btn-retry {
+  margin-top: 4px;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-retry:hover {
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+  border-color: var(--accent-primary);
+}

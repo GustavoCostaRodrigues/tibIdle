@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: http: blob:; connect-src *;">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TibIdle Manager</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+  <div id="app-root">
+    <!-- BARRA DE TÍTULO CUSTOMIZADA (FRAMELESS) -->
+    <header class="titlebar" id="app-titlebar">
+      <!-- Esquerda: Brand -->
+      <div class="titlebar-left">
+        <div class="titlebar-brand">
+          <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.5 17.5L3 6V3h3l11.5 11.5"/>
+            <path d="M13 19l6-6"/>
+            <path d="M16 16l4 4"/>
+            <path d="M19 21l2-2"/>
+          </svg>
+          <span class="brand-title">TibIdle</span>
+          <span class="brand-badge">v1.0.0</span>
+        </div>
+      </div>
+
+      <!-- Centro: Switch de Layout & Métricas de Desempenho -->
+      <div class="titlebar-center">
+        <!-- Switch de Layout Dinâmico (Grid 2x2 vs Layout 1x3) -->
+        <div class="layout-switcher" role="radiogroup" aria-label="Modo de visualização">
+          <button id="btn-layout-grid" class="layout-btn active" title="Grade Simétrica 2x2" aria-checked="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7" rx="1" />
+              <rect x="14" y="3" width="7" height="7" rx="1" />
+              <rect x="14" y="14" width="7" height="7" rx="1" />
+              <rect x="3" y="14" width="7" height="7" rx="1" />
+            </svg>
+            <span>Grid 2x2</span>
+          </button>
+          <button id="btn-layout-1x3" class="layout-btn" title="Layout 1x3 (Foco Principal + Lateral)"
+            aria-checked="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <rect x="3" y="3" width="11" height="18" rx="1" />
+              <rect x="16" y="3" width="5" height="4.5" rx="1" />
+              <rect x="16" y="9.75" width="5" height="4.5" rx="1" />
+              <rect x="16" y="16.5" width="5" height="4.5" rx="1" />
+            </svg>
+            <span>Layout 1x3</span>
+          </button>
+        </div>
+
+        <!-- Telemetria de CPU e RAM -->
+        <div class="system-metrics">
+          <div class="metric-item">
+            <span class="metric-dot"></span>
+            <span>CPU:</span>
+            <strong id="metric-cpu">0%</strong>
+          </div>
+          <div class="metric-item">
+            <span>RAM:</span>
+            <strong id="metric-ram">0 MB</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Direita: Ações & Controles de Janela -->
+      <div class="titlebar-right">
+        <!-- Botão Recarregar Todas as Contas -->
+        <button id="btn-reload-all" class="btn-reload-all" title="Recarregar todas as contas de uma vez">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+          </svg>
+          <span>Recarregar Tudo</span>
+        </button>
+
+        <!-- Controles de Janela Windows/Linux -->
+        <div class="window-controls" id="window-controls">
+          <button id="btn-window-minimize" class="window-btn" title="Minimizar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+          </button>
+          <button id="btn-window-maximize" class="window-btn" title="Maximizar / Restaurar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="5" y="5" width="14" height="14" rx="2" />
+            </svg>
+          </button>
+          <button id="btn-window-close" class="window-btn btn-close" title="Fechar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="6" y1="6" x2="18" y2="18" />
+              <line x1="6" y1="18" x2="18" y2="6" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- WORKSPACE PRINCIPAL -->
+    <main class="main-content">
+      <div class="accounts-viewport" id="accounts-viewport">
+        <div class="accounts-container" id="accounts-container" data-layout="grid-2x2">
+          <!-- Os 4 Cards com Webviews são inseridos aqui -->
+        </div>
+      </div>
+    </main>
+
+    <!-- CONTAINER DE TOASTS FLUTUANTES -->
+    <div class="toast-container" id="toast-container"></div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+
+</html>
